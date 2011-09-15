@@ -1,0 +1,17 @@
+#!/bin/sh
+
+build_cscope() {
+    local search_dir=$1
+    cd $search_dir > /dev/null 2>&1
+
+    find . -name '*.[ch]' -print > cscope.files
+    cscope -b -f cscope.out -i cscope.files
+
+    return 0
+}
+
+################################################################################
+# main
+################################################################################
+
+build_cscope $@
