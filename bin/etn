@@ -1,5 +1,22 @@
 #!/usr/bin/env expect
 
+set progname "etn"
+
+proc usage {msg} {
+    global progname
+
+    puts $msg
+    puts "Usage: $progname <server> <username> <password>"
+
+    exit 1
+}
+
+set argc [llength $argv]
+
+if { $argc < 3 } {
+    usage "ERROR: missing arguments"
+}
+
 set timeout 20
 set name     [lindex $argv 0]
 set user     [lindex $argv 1]
@@ -8,9 +25,9 @@ set password [lindex $argv 2]
 spawn telnet $name
 
 expect -re "\[lL]ogin:"
-send "$user\n"
+send "$user\r"
 
 expect -re "\[pP]assword:"
-send "$password\n"
+send "$password\r"
 
 interact
