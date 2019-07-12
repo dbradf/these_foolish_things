@@ -1,0 +1,7 @@
+#!/usr/bin/env bash
+
+install_dir=${1:-$HOME/bin}
+
+for file in $(ls bin); do
+    ln -s $(pwd)/bin/$file $install_dir/$file
+done
